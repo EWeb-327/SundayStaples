@@ -19,16 +19,41 @@ $(".btn").on("click", function() {
                 var img = $("<div>").html("<img src='" + results[i].recipe.image + "'/>");
                 var info = $("<div>").text("Time: " + results[i].recipe.totalTime + " min.  ||  " + "Servings: " + results[i].recipe.yield)
                 var url = $("<div>").html("<a href='" + results[i].recipe.url + "'>" + results[i].recipe.url + "</a>");
+                $(ingredients).append(line)
                 var arr = results[i].recipe.ingredientLines
                 console.log(arr)
                 var ingredients = $("<ul>")
                 for (var j = 0; j < arr.length; j++){
                     console.log(arr[j])
                     var line = $("<li>").text(arr[j])
-                    $(ingredients).append(line)
                 }
+           
             newDiv.prepend(label, img, info, ingredients, url);
             $(".list-of-recipes").append(newDiv);
             }
         })
 })
+var whisk = whisk || {};
+whisk.queue = whisk.queue || [];
+
+whisk.queue.push(function () {
+  whisk.shoppingList.defineWidget("FNFI-CVBO-MDUY-TCQH", {
+    onlineCheckout: {
+      enabled: true,
+      allowedRetailers: [
+        "US:AmazonFresh",
+        "US:Peapod",
+        "US:Walmart",
+        "US:Instacart"
+      ]
+    },
+    styles: {
+      button: {
+        color: "#15BBD1"
+      }
+    }
+  });
+});
+whisk.queue.push(function () {
+    whisk.display("FNFI-CVBO-MDUY-TCQH");
+  });
